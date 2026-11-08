@@ -63,7 +63,7 @@ def test_nyquist_even_up_down_amplitude():
 def test_float64_precision_and_gradcheck():
     """Verify float64 precision retention and autograd gradient correctness via gradcheck."""
     dtype = torch.float64
-    x = torch.randn(1, 1, 4, 4, 4, dtype=dtype, requires_grad=True)
+    x = (torch.arange(64, dtype=dtype).reshape(1, 1, 4, 4, 4) / 64).requires_grad_()
 
     out = resample(x, [1.5, 1.5, 1.5], [-3, -2, -1])
     assert out.dtype == torch.float64
